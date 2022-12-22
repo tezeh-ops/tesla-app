@@ -9,7 +9,7 @@
 </head>
 </head>
 <body>
-	<h2 align="center">YOU ARE WELCOM TO SAMUELTECH</h2>
+	<h2 align="center">YOU ARE WELCOM TO SAMUELTECH. WITH GOD ALL THINGS ARE POSIBLE</h2>
 <h1 align="center">Landmark Technology - Leaders in Software Delivery and DevOps Automation</h1>
 <h2 align="center"> Welcome to Landmark Technology.......We have a demo on DevOps E Degree with Linux and AWS  on Sunday Oct 9, 2022 at 3PM EST for our new batch. 
 	Landmark Technology Tesla web application project2. 
