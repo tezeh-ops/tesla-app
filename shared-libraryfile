@@ -1,0 +1,46 @@
+@Library('Tezehtech-sharedlibs') _   // this is how you start your shared libraryfile @Library('the libraryname you confugure')
+// declarative pipeline
+pipeline{
+    agent any
+    tools{
+        maven "maven3.8.6"
+    }
+stages{
+    stage("1gitpull"){
+        steps{
+            sh "echo ' start of projrect' "
+            git "https://github.com/tezeh-ops/tesla-app"
+        }
+    }
+    stage("Build"){                //shared Library start here
+        steps{
+            sh "echo 'build + creating artifacts' "
+            sam("Build")                                 sam=the name of my share library script(file) sam.groovy
+        }
+    }
+    stage("execute sonarqube Report"){
+        steps{
+            sh "echo ' Running sonarqube test analysis' "
+            sam("SonarQube Report")
+        }
+    }
+    stage("upload artifacts"){
+        steps{
+            sh "echo ' Uploading artifacts in to Nexus' "
+            sam("upload artifacts")
+        }
+    }                                                    //ends here
+    stage('deployment'){
+        steps{
+            sh "echo ' Ready for deployment' "
+           // sh "scp sampro.war ec2-user@54.208.47.25:/opt/tomcat9/webapps/"     //still to figure out how to use it
+          // withCredentials([sshUserPrivateKey(credentialsId: 'tomcatSSHkeyPEM', keyFileVariable: 'keyfile', usernameVariable: 'sam')]) {
+    // some block
+//}
+  withCredentials([sshUserPrivateKey(credentialsId: 'tomcatSSHkeyPEM', keyFileVariable: 'keyfile', usernameVariable: 'samprivatekey')]) {
+    // some block                   //deploy to tocat using SSHKey through pipelin syntax (withcredentials:Build credential to Variables)
+} 
+        }
+    }
+}    
+}
